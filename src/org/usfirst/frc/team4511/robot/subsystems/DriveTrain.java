@@ -5,15 +5,12 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import org.usfirst.frc.team4511.robot.RobotMap;
 import org.usfirst.frc.team4511.robot.commands.Drive;
 
-/**
- *
- */
 public class DriveTrain extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	protected RobotDrive DriveTrain;
+	private RobotDrive DriveTrain;
 
 	public void Drive() {
 		DriveTrain = new RobotDrive(RobotMap.frontRight, RobotMap.frontLeft, RobotMap.backRight, RobotMap.backLeft);

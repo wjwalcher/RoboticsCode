@@ -1,7 +1,14 @@
 package org.usfirst.frc.team4511.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team4511.robot.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import org.usfirst.frc.team4511.robot.commands.Extend;
+import org.usfirst.frc.team4511.robot.commands.LiftDown;
+import org.usfirst.frc.team4511.robot.commands.LiftStop;
+import org.usfirst.frc.team4511.robot.commands.LiftUp;
+import org.usfirst.frc.team4511.robot.commands.Retract;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -12,10 +19,14 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	public double deadzone;
 	
-	public Button buttonX;
-
-	public Joystick Joystick1;
-	public Joystick Joystick2;
+	//public Button button6;
+	public Button button1;
+	public Button button3;
+	public Button button2;
+	public Button button8;
+	public Button button10;
+	public Joystick joystick1;
+	public Joystick joystick2;
 
 	// // CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
@@ -26,16 +37,27 @@ public class OI {
 	// Button button = new JoystickButton(stick, buttonNumber);
 
 	public OI() {
-		Joystick1 = new Joystick(1);
-		Joystick2 = new Joystick(2);
-		
-		
-		
+		joystick1 = new Joystick(0);
+		joystick2 = new Joystick(1);
+		button3 = new JoystickButton(joystick1, 3);
+		button2 = new JoystickButton(joystick1, 2);
+		button1 = new JoystickButton(joystick1, 1);
+		//button6 = new JoystickButton(joystick1, 6);
+		button10 = new JoystickButton(joystick2, 1);
 		deadzone = .1;
+	
+		button3.whenPressed(new Extend());		
+		button2.whenPressed(new Retract());
+		button1.whileHeld(new LiftUp());
+		button1.whenReleased(new LiftStop());
+		button10.whileHeld(new LiftDown());
+		button10.whenReleased(new LiftStop());
+		//button6.whileHeld(new LiftDown());
+		//button6.whenReleased(new LiftStop());
 	}
 
 	public double getXInput() {
-		double x = Joystick1.getX();
+		double x = joystick1.getX();
     		if (x > deadzone) {
     			return x * x;
     		}
@@ -49,7 +71,7 @@ public class OI {
     		}
     	}
 	public double getYInput() {
-    	double y = Joystick1.getY();
+    	double y = joystick1.getY();
     		if (y > deadzone) {
     			return y * y;
     		}
@@ -63,7 +85,7 @@ public class OI {
     		}
     	}
 	public double getZInput() {
-		double z = Joystick2.getX();
+		double z = joystick2.getX();
 			if (z > deadzone) {
 				return z * z;
 			}
@@ -76,17 +98,9 @@ public class OI {
 				return 0;
 			}
 	}
-	public boolean getTrigger() {
-		double t = Joystick1.getTrigger();
-		if (!t) {
-			return ShootPiston.extend();
-		}
-		else if (t) {
-			return ShootPiston.retract();
-		}
-		else {
-			return false;
-		}
+	
+
+			
 }
 
 
@@ -110,4 +124,4 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
-}
+

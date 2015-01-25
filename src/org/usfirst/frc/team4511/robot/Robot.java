@@ -2,11 +2,14 @@
 package org.usfirst.frc.team4511.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+
 import org.usfirst.frc.team4511.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team4511.robot.commands.ExampleCommand;
+
+import org.usfirst.frc.team4511.robot.commands.Drive;
 import org.usfirst.frc.team4511.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -31,8 +34,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new Drive();
         RobotMap.compressor.start();
+        autonomousCommand = new Drive();
     }
 	
 	public void disabledPeriodic() {

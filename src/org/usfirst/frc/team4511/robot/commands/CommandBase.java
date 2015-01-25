@@ -1,19 +1,33 @@
 package org.usfirst.frc.team4511.robot.commands;
 
+import org.usfirst.frc.team4511.robot.OI;
+import org.usfirst.frc.team4511.robot.RobotMap;
+import org.usfirst.frc.team4511.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class Lift extends Command {
+public class CommandBase extends Command {
 
-    public Lift() {
+	public static OI oi;
+	public static RobotMap robotMap = new RobotMap();
+    public static DriveTrain driveMec = new DriveTrain();
+	    
+    public CommandBase() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    public static void init() {
+    	oi = new OI();
+
+    	
+    	SmartDashboard.putData(driveMec);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,4 +47,10 @@ public class Lift extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
 }
